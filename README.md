@@ -1,5 +1,5 @@
 ## first, clone the repo 
-git clone 
+```git clone git@github.com:Jethrolopwus/hybr-frontend.git```
 ## Secondly, run the development server:
 
 ```bash
