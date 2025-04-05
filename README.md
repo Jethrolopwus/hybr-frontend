@@ -1,6 +1,6 @@
 ## First, run the development server:
 
-
+```bash
 npm run dev
 ## or
 yarn dev
@@ -8,7 +8,8 @@ yarn dev
 pnpm dev
 ## or
 bun dev
+```
 
 
 ## for building the app use:
-npm run build
+```npm run build```
