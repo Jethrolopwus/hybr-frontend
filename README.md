@@ -1,4 +1,6 @@
-## First, run the development server:
+## first, clone the repo 
+git clone 
+## Secondly, run the development server:
 
 ```bash
 npm run dev
