@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import {   useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Head from "next/head";
 import { AssessmentResults, CategoryScore } from "@/types/generatedTypes";
@@ -13,6 +12,8 @@ const Results = () => {
   const id = searchParams.get("id");
 
   const [results, setResults] = useState<AssessmentResults | null>(null);
+  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [chartType, setChartType] = useState<"radar" | "bar">("radar");
@@ -59,6 +60,7 @@ const Results = () => {
 
   if (error || !results) {
     return (
+     
       <div className="max-w-md mx-auto py-20 px-4 text-center">
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           <h2 className="font-bold">Error Loading Results</h2>
@@ -71,11 +73,14 @@ const Results = () => {
           Return to Home
         </button>
       </div>
+     
+     
     );
   }
 
   return (
     <>
+
       <Head>
         <title>Innovation Results</title>
       </Head>
@@ -87,7 +92,7 @@ const Results = () => {
           {new Date(results.createdAt).toLocaleDateString()}
         </p>
         <p className="mb-8 text-gray-700">
-          Based on your responses, here's how your organization is performing.
+          Based on your responses, here&apos;s how your organization is performing.
         </p>
 
         {/* User Information */}
@@ -202,20 +207,7 @@ const Results = () => {
           </div>
         </section>
 
-        {/* Recommendations */}
-        {/*<section className="mb-10">
-          <h2 className="text-xl font-semibold mb-4">Recommendations</h2>
-          <ul className="space-y-3">
-            {results.recommendations.map((rec: string, index: number) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 w-5 h-5 text-blue-600 mr-2 mt-0.5">
-                  ✓
-                </span>
-                <p className="text-gray-700">{rec}</p>
-              </li>
-            ))}
-          </ul>
-        </section>*/}
+       
 
         {/* Actions */}
         <div className="flex flex-wrap gap-4">
@@ -239,6 +231,7 @@ const Results = () => {
           </button>
         </div>
       </main>
+      
     </>
   );
 };

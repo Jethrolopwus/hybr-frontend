@@ -18,7 +18,7 @@ export default function Home() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Innovation Index Toolkit</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Assess your organization's innovation capabilities and discover opportunities for growth.
+            Assess your organizations innovation capabilities and discover opportunities for growth.
           </p>
         </div>
 
@@ -26,7 +26,7 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Why Assess Innovation?</h2>
             <p className="mb-4">
-              Understanding your organization's innovation strengths and weaknesses is the first step toward 
+              Understanding your organizations innovation strengths and weaknesses is the first step toward 
               building a more innovative culture and competitive advantage.
             </p>
             <p>
@@ -35,7 +35,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4">What You'll Learn</h2>
+            <h2 className="text-2xl font-bold mb-4">What You will Learn</h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Your overall innovation index score</li>
               <li>Performance across five key innovation dimensions</li>

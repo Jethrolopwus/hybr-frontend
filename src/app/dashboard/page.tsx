@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { LineChart, BarChart } from '@/components/Charts';
+import { LineChart } from '@/components/Charts';
 import InnovationScoreCard from '@/components/ScoreCard';
 import ProjectsList from '@/components/ProjectList';
 import TeamPerformance from '@/components/TeamPerformance';

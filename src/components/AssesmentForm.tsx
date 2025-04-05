@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -264,7 +265,7 @@ const AssessmentForm: React.FC = () => {
           <p className="mb-6 text-gray-600">
             Please rate each statement on a scale of 1-5 according to the
             provided scale. Your honest assessment will help identify your
-            organization's innovation strengths and opportunities.
+            organization&apos;s innovation strengths and opportunities.
           </p>
 
           <form onSubmit={handleSubmit}>

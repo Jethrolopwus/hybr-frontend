@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Question as QuestionType } from '@/types/generatedTypes';
 

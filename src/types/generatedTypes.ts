@@ -16,7 +16,13 @@ export interface ResultsChartProps {
 
 export interface AssessmentResults {
   createdAt: string | number | Date;
-  User: any;
+  User: {
+    name: string;
+    email: string;
+    company: string;
+    industry: string;
+    companySize: string;
+  };
   totalScore: number;
   categoryScores: Record<string, CategoryScore>;
   recommendations: string[] | undefined;

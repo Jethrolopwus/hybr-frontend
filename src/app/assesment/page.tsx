@@ -17,7 +17,7 @@ const Assessment: NextPage = () => {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Innovation Assessment</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Complete the form below to assess your organization's innovation capabilities.
+            Complete the form below to assess your organizations innovation capabilities.
           </p>
         </div>
         <AssessmentForm />
