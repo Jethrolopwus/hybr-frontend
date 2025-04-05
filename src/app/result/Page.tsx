@@ -1,20 +1,22 @@
 "use client";
-import {   useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Head from "next/head";
 import { AssessmentResults, CategoryScore } from "@/types/generatedTypes";
 import { RadarChartView, BarChartView } from "@/components/ResultsChart";
 import { CATEGORIES } from "@/utils/questions";
+import { NextPage } from "next";
+import React from "react";
 
-const Results = () => {
+const Results: NextPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
   const [results, setResults] = useState<AssessmentResults | null>(null);
-  
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [chartType, setChartType] = useState<"radar" | "bar">("radar");
 
@@ -60,7 +62,6 @@ const Results = () => {
 
   if (error || !results) {
     return (
-     
       <div className="max-w-md mx-auto py-20 px-4 text-center">
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           <h2 className="font-bold">Error Loading Results</h2>
@@ -73,14 +74,11 @@ const Results = () => {
           Return to Home
         </button>
       </div>
-     
-     
     );
   }
 
   return (
-    <>
-
+      <React.Suspense fallback={<div>Loading...</div>}>
       <Head>
         <title>Innovation Results</title>
       </Head>
@@ -92,7 +90,8 @@ const Results = () => {
           {new Date(results.createdAt).toLocaleDateString()}
         </p>
         <p className="mb-8 text-gray-700">
-          Based on your responses, here&apos;s how your organization is performing.
+          Based on your responses, here&apos;s how your organization is
+          performing.
         </p>
 
         {/* User Information */}
@@ -207,8 +206,6 @@ const Results = () => {
           </div>
         </section>
 
-       
-
         {/* Actions */}
         <div className="flex flex-wrap gap-4">
           <button
@@ -231,8 +228,7 @@ const Results = () => {
           </button>
         </div>
       </main>
-      
-    </>
+    </React.Suspense>
   );
 };
 
