@@ -1,3 +1,5 @@
+
+"use client";
 import React from 'react'
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -5,6 +7,7 @@ import Head from "next/head";
 import { AssessmentResults, CategoryScore } from "@/types/generatedTypes";
 import { RadarChartView, BarChartView } from "@/components/ResultsChart";
 import { CATEGORIES } from "@/utils/questions";
+
 const ResultsComponent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -12,7 +15,6 @@ const ResultsComponent = () => {
   
     const [results, setResults] = useState<AssessmentResults | null>(null);
   
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [chartType, setChartType] = useState<"radar" | "bar">("radar");
@@ -56,17 +58,29 @@ const ResultsComponent = () => {
   
       fetchResults();
     }, [id]);
-  
+    
+    if (isLoading) {
+      return (
+        <div className="max-w-md mx-auto py-20 px-4 text-center">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="h-8 w-64 bg-gray-200 rounded mb-4"></div>
+            <div className="h-4 w-48 bg-gray-200 rounded mb-8"></div>
+            <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        </div>
+      );
+    }
+    
     if (error || !results) {
       return (
         <div className="max-w-md mx-auto py-20 px-4 text-center">
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             <h2 className="font-bold">Error Loading Results</h2>
-            <p>{error || "Assessment results not found"}</p>
+            <p>{error || "Assessment results Loading"}</p>
           </div>
           <button
             onClick={() => router.push("/")}
-            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+            className="bg-[rgb(165,218,92)] text-white py-2 px-4 rounded-md hover:bg-[#2c4652]"
           >
             Return to Home
           </button>
@@ -74,14 +88,15 @@ const ResultsComponent = () => {
       );
     }
   
+  
     return (
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <>
         <Head>
           <title>Innovation Results</title>
         </Head>
   
-        <main className="max-w-4xl mx-auto px-4 py-10">
-          <h1 className="text-3xl font-bold mb-2">Your Innovation Results</h1>
+        <main className="w-full max-w-4xl mx-auto px-4 py-10 overflow-x-hidden">
+          <h1 className="text-3xl font-bold mb-2 break-words">Your Innovation Results</h1>
           <p className="text-sm text-gray-500 mb-6">
             Assessment completed on:{" "}
             {new Date(results.createdAt).toLocaleDateString()}
@@ -97,19 +112,19 @@ const ResultsComponent = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-600">Name:</p>
-                <p className="font-medium">{results.User.name}</p>
+                <p className="font-medium break-words">{results.User.name}</p>
               </div>
               <div>
                 <p className="text-gray-600">Company:</p>
-                <p className="font-medium">{results.User.company}</p>
+                <p className="font-medium break-words">{results.User.company}</p>
               </div>
               <div>
                 <p className="text-gray-600">Industry:</p>
-                <p className="font-medium">{results.User.industry}</p>
+                <p className="font-medium break-words">{results.User.industry}</p>
               </div>
               <div>
                 <p className="text-gray-600">Company Size:</p>
-                <p className="font-medium">{results.User.companySize}</p>
+                <p className="font-medium break-words">{results.User.companySize}</p>
               </div>
             </div>
           </section>
@@ -118,13 +133,13 @@ const ResultsComponent = () => {
           <section className="mb-8">
             <h2 className="text-xl font-semibold">Overall Score</h2>
             <div className="flex items-center gap-4 mt-2">
-              <p className="text-4xl font-bold text-blue-600">
+              <p className="text-4xl font-bold text-[rgb(165,218,92)] shrink-0">
                 {results.totalScore.toFixed(1)}/40.0
               </p>
-              <div className="w-full bg-gray-200 rounded-full h-4">
+              <div className="w-full bg-gray-200 rounded-full h-4 min-w-0">
                 <div
-                  className="bg-blue-600 h-4 rounded-full"
-                  style={{ width: `${results.totalScore * 10}%` }}
+                  className="bg-[rgb(165,218,92)] h-4 rounded-full"
+                  style={{ width: `${results.totalScore * 2.5}%` }}
                 ></div>
               </div>
             </div>
@@ -143,12 +158,12 @@ const ResultsComponent = () => {
           <section className="mb-10">
             <h2 className="text-xl font-semibold mb-4">Dimension Scores</h2>
   
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4 mb-6 flex-wrap">
               <button
                 onClick={() => setChartType("radar")}
                 className={`px-3 py-1 rounded transition-colors ${
                   chartType === "radar"
-                    ? "bg-blue-600 text-white"
+                    ? "bg-[rgb(165,218,92)] text-white"
                     : "bg-gray-200 hover:bg-gray-300"
                 }`}
               >
@@ -158,7 +173,7 @@ const ResultsComponent = () => {
                 onClick={() => setChartType("bar")}
                 className={`px-3 py-1 rounded transition-colors ${
                   chartType === "bar"
-                    ? "bg-blue-600 text-white"
+                    ? "bg-[rgb(165,218,92)] text-white"
                     : "bg-gray-200 hover:bg-gray-300"
                 }`}
               >
@@ -166,12 +181,14 @@ const ResultsComponent = () => {
               </button>
             </div>
   
-            <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
-              {chartType === "radar" ? (
-                <RadarChartView categoryScores={results.categoryScores} />
-              ) : (
-                <BarChartView categoryScores={results.categoryScores} />
-              )}
+            <div className="bg-white p-4 rounded-lg shadow-sm mb-6 overflow-x-auto">
+              <div className="min-w-[280px]">
+                {chartType === "radar" ? (
+                  <RadarChartView categoryScores={results.categoryScores} />
+                ) : (
+                  <BarChartView categoryScores={results.categoryScores} />
+                )}
+              </div>
             </div>
   
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -181,17 +198,17 @@ const ResultsComponent = () => {
                     key={key}
                     className="p-4 bg-gray-50 rounded-lg border border-gray-200"
                   >
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-semibold text-gray-800">
+                    <div className="flex justify-between items-start flex-wrap gap-2">
+                      <h3 className="font-semibold text-gray-800 break-words">
                         {CATEGORIES[key as keyof typeof CATEGORIES] || key}
                       </h3>
-                      <span className="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                      <span className="bg-blue-100 text-[rgb(165,218,92)] text-sm font-medium px-2.5 py-0.5 rounded whitespace-nowrap">
                         {score.score.toFixed(1)}/{score.maxScore}
                       </span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                       <div
-                        className="bg-blue-600 h-2 rounded-full"
+                        className="bg-[rgb(165,218,92)] h-2 rounded-full"
                         style={{
                           width: `${(score.score / score.maxScore) * 100}%`,
                         }}
@@ -207,7 +224,7 @@ const ResultsComponent = () => {
           <div className="flex flex-wrap gap-4">
             <button
               onClick={() => window.print()}
-              className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors"
+              className="bg-[rgb(165,218,92)] text-white py-2 px-6 rounded-md hover:bg-[#2c4652] transition-colors"
             >
               Print Results
             </button>
@@ -225,8 +242,7 @@ const ResultsComponent = () => {
             </button>
           </div>
         </main>
-      </React.Suspense>
+     </>
     );
-}
-
+  }
 export default ResultsComponent

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -104,7 +104,9 @@ const AssessmentForm: React.FC = () => {
       const data = await response.json();
       console.log("I am Data", data.assessment.id);
       router.push(`/result/?id=${data.assessment.id}`);
-    } catch (error) {
+  
+    } catch (error: unknown) {
+      console.error('Assessment submission failed:', error);
       setErrors(["Failed to submit assessment. Please try again."]);
       setIsSubmitting(false);
     }
@@ -252,7 +254,7 @@ const AssessmentForm: React.FC = () => {
             <div className="mt-8 flex justify-center">
               <button
                 type="submit"
-                className="w-80 bg-[#0675a8] text-white py-3 px-4 rounded-md hover:bg-"
+                className="w-80 bg-[rgb(165,218,92)] text-white py-3 px-4 rounded-md hover:bg-"
               >
                 Continue to Assessment
               </button>
@@ -289,10 +291,10 @@ const AssessmentForm: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`flex-1 bg-blue-600 text-white py-3 px-4 rounded-md ${
+                className={`flex-1 bg-[rgb(165,218,92)] text-white py-3 px-4 rounded-md ${
                   isSubmitting
                     ? "opacity-70 cursor-not-allowed"
-                    : "hover:bg-blue-700"
+                    : "hover:bg-[#2c4652]"
                 }`}
               >
                 {isSubmitting ? "Submitting..." : "Submit Assessment"}

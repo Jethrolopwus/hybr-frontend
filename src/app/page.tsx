@@ -47,7 +47,7 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <Link href="/assesment" className="inline-block  bg-[#0675a8] hover:bg-[#2c4652] text-white font-bold py-3 px-8 rounded-md text-lg">
+          <Link href="/assesment" className="inline-block  bg-[rgb(165,218,92)] hover:bg-[#2c4652] text-white font-bold py-3 px-8 rounded-md text-lg">
             Start Your Assessment
           </Link>
         </div>

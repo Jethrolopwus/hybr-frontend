@@ -1,3 +1,4 @@
+"use client";
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import AssessmentForm from '@/components/AssesmentForm';
@@ -20,7 +21,7 @@ const Assessment: NextPage = () => {
             Complete the form below to assess your organizations innovation capabilities.
           </p>
         </div>
-        <AssessmentForm />
+        <AssessmentForm/>
       </main>
       <Footer/>
     </div>

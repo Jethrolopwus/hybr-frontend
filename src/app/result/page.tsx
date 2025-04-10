@@ -6,7 +6,7 @@ import React, { Suspense } from "react";
 
 const Results: NextPage = () => {
   return (
-    <Suspense>
+    <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
       <ResultsComponent />;
     </Suspense>
   );

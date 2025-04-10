@@ -23,7 +23,7 @@ const Question: React.FC<QuestionProps> = ({ question, value, onChange }) => {
               type="button"
               className={`w-full py-2 px-3 rounded ${
                 value === rating
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[rgb(165,218,92)] text-white'
                   : 'bg-gray-100 hover:bg-gray-200'
               }`}
               onClick={() => onChange(question.id, rating)}
